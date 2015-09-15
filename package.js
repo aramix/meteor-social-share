@@ -1,10 +1,10 @@
 Package.describe({
-  name: 'lukemadera:social-share',
-  version: '1.0.0',
+  name: 'ipstas:social-share',
+  version: '1.0.1',
   // Brief, one-line summary of the package.
-  summary: 'Cross platform (inc. Cordova) social sharing for facebook, twitter, pinterest',
+  summary: 'Forked from lukemadera:social-share. Facebook, twitter, pinterest. Fork: buttons in bootstrap way',
   // URL to the Git repository containing the source code for this package.
-  git: '',
+  git: 'https://github.com/XLazz/shareit',
   // By default, Meteor will default to using README.md for documentation.
   // To avoid submitting documentation, set this field to null.
   documentation: 'README.md'
@@ -15,7 +15,7 @@ Package.onUse(function(api) {
 
   api.use('templating@1.0.0');
   api.use('blaze@2.0.0');
-  api.use('reactive-var@1.0.5');
+	api.use('tanis:bootstrap-social@0.1.1');
 
   Cordova.depends({
     'org.apache.cordova.inappbrowser': '0.6.0'
@@ -32,6 +32,6 @@ Package.onUse(function(api) {
 
 Package.onTest(function(api) {
   api.use('tinytest');
-  api.use('lukemadera:social-share');
+  api.use('ipstas:social-share');
   api.addFiles('social-share-tests.js');
 });
