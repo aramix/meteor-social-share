@@ -45,7 +45,7 @@ if(Meteor.isClient) {
           facebook: 'btn-facebook btn-primary',
           twitter: 'btn-twitter btn-primary',
           pinterest: 'btn-pinterest btn-primary'
-        },
+        }
       };
       return opts;
     }
