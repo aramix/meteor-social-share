@@ -1,6 +1,6 @@
 Package.describe({
   name: 'aramix:social-share',
-  version: '1.0.1',
+  version: '1.0.2',
   // Brief, one-line summary of the package.
   summary: 'Forked from ipstas:social-share. Facebook, twitter, pinterest. Fork: buttons in bootstrap way',
   // URL to the Git repository containing the source code for this package.
