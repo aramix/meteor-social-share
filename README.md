@@ -37,14 +37,14 @@ if(Meteor.isClient) {
       var opts ={
         facebook: true,
         twitter: true,
-        pinterest: false,
+        pinterest: true,
         shareData: {
           url: 'http://google.com'
         },
         customClasses: {
-          facebook: 'btn-facebook btn-primary',
-          twitter: 'btn-twitter btn-primary',
-          pinterest: 'btn-pinterest btn-primary'
+          facebook: 'btn-xs btn-sm btn-lg',
+          twitter: 'btn-xs btn-sm btn-lg',
+          pinterest: 'btn-xs btn-sm btn-lg' // whatever else you want
         }
       };
       return opts;
