@@ -1,4 +1,5 @@
-# lukemadera:social-share
+# aramix:social-share
+Forked from ipstas:social-share
 
 Cross platform (inc. Cordova) social sharing for facebook, twitter, pinterest
 
