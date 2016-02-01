@@ -19,7 +19,7 @@ Cross platform (inc. Cordova) social sharing for facebook, twitter, pinterest
 
 In a Meteor app directory:
 ```bash
-meteor add lukemadera:social-share
+meteor add aramix:social-share
 ```
 
 
@@ -39,7 +39,12 @@ if(Meteor.isClient) {
         pinterest: false,
         shareData: {
           url: 'http://google.com'
-        }
+        },
+        customClasses: {
+          facebook: 'btn-facebook btn-primary',
+          twitter: 'btn-twitter btn-primary',
+          pinterest: 'btn-pinterest btn-primary'
+        },
       };
       return opts;
     }

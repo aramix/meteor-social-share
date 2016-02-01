@@ -1,10 +1,10 @@
 Package.describe({
-  name: 'ipstas:social-share',
-  version: '1.0.2',
+  name: 'aramix:social-share',
+  version: '1.0.1',
   // Brief, one-line summary of the package.
-  summary: 'Forked from lukemadera:social-share. Facebook, twitter, pinterest. Fork: buttons in bootstrap way',
+  summary: 'Forked from ipstas:social-share. Facebook, twitter, pinterest. Fork: buttons in bootstrap way',
   // URL to the Git repository containing the source code for this package.
-  git: 'https://github.com/XLazz/shareit',
+  git: 'https://github.com/aramix/meteor-social-share',
   // By default, Meteor will default to using README.md for documentation.
   // To avoid submitting documentation, set this field to null.
   documentation: 'README.md'
@@ -32,6 +32,6 @@ Package.onUse(function(api) {
 
 Package.onTest(function(api) {
   api.use('tinytest');
-  api.use('ipstas:social-share');
+  api.use('aramix:social-share');
   api.addFiles('social-share-tests.js');
 });

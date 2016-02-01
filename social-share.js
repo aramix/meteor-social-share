@@ -13,20 +13,20 @@ lmSocialSharePrivate ={};
   @param {String} [defaultShareText] The default tweet/fb post/etc. text to pre-populate (user can alter)
 */
 
-xlazzSocialLink = function(params, shareData) {
+amxSocialLink = function(params, shareData) {
 	var sharedUrl = location.href;
 	var type = params.currentTarget.id;
   var link;
-  if(type ==='xlazz-facebook') {
+  if(type ==='amx-facebook') {
     link ='https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(sharedUrl);
   }
-  else if(type ==='xlazz-twitter') {
+  else if(type ==='amx-twitter') {
     link ='https://twitter.com/share?url='+encodeURIComponent(sharedUrl);
     if(shareData.defaultShareText !==undefined) {
       link +='&text='+encodeURIComponent(shareData.defaultShareText);
     }
   }
-  else if(type ==='xlazz-pinterest') {
+  else if(type ==='amx-pinterest') {
     link ='http://pinterest.com/pin/create/button/?url='+encodeURIComponent(sharedUrl)+'&media='+encodeURIComponent(shareData.image)+'&description='+encodeURIComponent(shareData.description);
   }
   return link;
@@ -52,8 +52,8 @@ Template.lmSocialShare.helpers({
 });
 
 Template.lmSocialShare.events({
-  'click .xlazz-social-share-btn': function(event, template) {
-		var link = xlazzSocialLink(event, this.opts.shareData);
+  'click .amx-social-share-btn': function(event, template) {
+		var link = amxSocialLink(event, this.opts.shareData);
 		console.log('lmSocialShare click', event, this, link);
     if(Meteor.isCordova) 
       window.open(link, "_blank", "location=yes");
