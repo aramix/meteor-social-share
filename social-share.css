@@ -1,3 +1,65 @@
+/**
+To display vertically under each other, instead of side by side:
+*/
+/*
+.amx-social-share-cont {
+  display: block;
+}
+.amx-social-share-cont .amx-social-share-btn, .amx-social-share-cont .amx-social-share-url-input {
+  display: block;
+  width: 100%;
+}
+*/
+
+.amx-social-share-cont {
+  /* Necessary to avoid spaces between the divs..
+  http://stackoverflow.com/questions/19038799/why-is-there-an-unexplainable-gap-between-these-inline-block-div-elements
+  */
+  display: flex;
+}
 .amx-social-share-btn {
   cursor: pointer;
+
+  display: inline-block;
+  text-align: center;
+}
+.amx-social-share-btn-icon {
+  width: 45px;
+  height: 45px;
+  margin-left: auto;
+  margin-right: auto;
+  fill: white;
+}
+.amx-social-share-btn.amx-social-share-email {
+  background-color: #333;
+}
+.amx-social-share-btn.amx-social-share-sms {
+  background-color: #666;
+}
+.amx-social-share-btn.amx-social-share-facebook {
+  background-color: #3b5998;
+}
+.amx-social-share-btn.amx-social-share-facebook-message {
+  background-color: #3b5998;
+}
+.amx-social-share-btn.amx-social-share-gmail {
+  background-color: #dd4b39;
+}
+.amx-social-share-btn.amx-social-share-google-plus {
+  background-color: #dd4b39;
+}
+.amx-social-share-btn.amx-social-share-linked-in {
+  background-color: #007bb5;
+}
+.amx-social-share-btn.amx-social-share-pinterest {
+  background-color: #cb2027;
+}
+.amx-social-share-btn.amx-social-share-twitter {
+  background-color: #00acee;
+}
+
+.amx-social-share-url-input {
+  width: 45px;
+  height: 45px;
+  text-align: center;
 }

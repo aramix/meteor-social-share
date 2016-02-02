@@ -1,8 +1,8 @@
 Package.describe({
   name: 'aramix:social-share',
-  version: '1.0.2',
+  version: '1.0.3',
   // Brief, one-line summary of the package.
-  summary: 'Forked from ipstas:social-share. Facebook, twitter, pinterest. Fork: buttons in bootstrap way',
+  summary: 'Forked from lukemadera:social-share. Facebook, twitter, pinterest. Fork: bootstrap support. Optional classes can be added to the social buttons.',
   // URL to the Git repository containing the source code for this package.
   git: 'https://github.com/aramix/meteor-social-share',
   // By default, Meteor will default to using README.md for documentation.
@@ -24,10 +24,11 @@ Package.onUse(function(api) {
   api.addFiles([
     'social-share.html',
     'social-share.css',
+    'social-share-svg.js',
     'social-share.js'
   ], 'client');
 
-  api.export('lmSocialShare');
+  api.export('amxSocialShare');
 });
 
 Package.onTest(function(api) {
