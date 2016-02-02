@@ -2,7 +2,7 @@ Package.describe({
   name: 'aramix:social-share',
   version: '1.0.3',
   // Brief, one-line summary of the package.
-  summary: 'Forked from lukemadera:social-share. Facebook, twitter, pinterest. Fork: bootstrap support. Optional classes can be added to the social buttons.',
+  summary: 'Forked from lukemadera:social-share. Now supports bootstrap and optional classes for social buttons.',
   // URL to the Git repository containing the source code for this package.
   git: 'https://github.com/aramix/meteor-social-share',
   // By default, Meteor will default to using README.md for documentation.
