@@ -1,4 +1,4 @@
-LmSocialShare = React.createClass({
+AmxSocialShare = React.createClass({
     mixins: [ReactMeteorData],
 
     getInitialState(){
@@ -18,7 +18,7 @@ LmSocialShare = React.createClass({
           (function(ii) {
             eles.ids[types[ii]] ='socialShare'+instid+types[ii];
             setTimeout(function() {
-              lmSocialShare.add(eles.ids[types[ii]], types[ii], shareData, {});
+              amxSocialShare.add(eles.ids[types[ii]], types[ii], shareData, {});
             }, 500);
           })(ii);
         }
