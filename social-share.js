@@ -65,156 +65,166 @@ This creates social sharing buttons. There's some complications for making
     @param {String} [twitter]
     @param {String} [url]
 */
-amxSocialShare.add =function(btnId, type, shareData, params) {
-  var platform =amxSocialSharePrivate.getPlatform();
-  var directLink =amxSocialSharePrivate.useDirectLink(type, platform);
-  if(document.getElementById(btnId)) {
-    if(directLink) {
+amxSocialShare.add = function(btnId, type, shareData, params) {
+  var platform = amxSocialSharePrivate.getPlatform();
+  var directLink = amxSocialSharePrivate.useDirectLink(type, platform);
+  if (document.getElementById(btnId)) {
+    if (directLink) {
       amxSocialShare.formLink(type, shareData, function(err, result) {
-        if(result.link) {
-          document.getElementById(btnId).href =result.link;
-          document.getElementById(btnId).target ='_blank';
-        }
-        else {
+        if (result.link) {
+          document.getElementById(btnId).href = result.link;
+          document.getElementById(btnId).target = '_blank';
+          if(params.bootstrap) {
+            var bootstrapClasses = ['btn', 'btn-lg', 'btn-social-icon'];
+            document.getElementById(btnId).classList.add(bootstrapClasses);
+          }
+          if(params.customClasses[type]) {
+            document.getElementById(btnId).classList.add(params.customClasses[type].trim().split(' '));
+          }
+        } else {
           console.error('amx-social-share no link');
         }
       });
-    }
-    else {
-      document.getElementById(btnId).onclick =function(evt) {
-        amxSocialSharePrivate.triggerShare(type, shareData, { btnId: btnId });
+    } else {
+      document.getElementById(btnId).onclick = function(evt) {
+        amxSocialSharePrivate.triggerShare(type, shareData, {
+          btnId: btnId
+        });
       };
     }
   }
 };
 
-amxSocialSharePrivate.useDirectLink =function(type, platform) {
-  if(type === 'email' ) {
-    return ( platform.cordova && platform.ios ) ? false :
-     ( platform.mobile || platform.cordova ) ? true : false;
-  }
-  else if(type === 'sms' ) {
-    return ( platform.cordova && platform.ios ) ? false : true;
+amxSocialSharePrivate.useDirectLink = function(type, platform) {
+  if (type === 'email') {
+    return (platform.cordova && platform.ios) ? false :
+      (platform.mobile || platform.cordova) ? true : false;
+  } else if (type === 'sms') {
+    return (platform.cordova && platform.ios) ? false : true;
   }
   return false;
 };
 
-amxSocialSharePrivate.getPlatform =function() {
-  var platform ={
+amxSocialSharePrivate.getPlatform = function() {
+  var platform = {
     cordova: Meteor.isCordova,
     ios: /iPhone|iPad|iPod/i.test(navigator.userAgent),
     android: /Android/i.test(navigator.userAgent),
     blackberry: /BlackBerry/i.test(navigator.userAgent),
     windows: /IEMobile/i.test(navigator.userAgent)
   };
-  platform.mobile = ( platform.ios || platform.android || platform.blackberry
-   || platform.windows ) ? true : false;
+  platform.mobile = (platform.ios || platform.android || platform.blackberry || platform.windows) ? true : false;
 
   return platform;
 };
 
-amxSocialShare.formLink =function(type, shareData, callback) {
+amxSocialShare.formLink = function(type, shareData, callback) {
   var link = null;
   var platform;
-  var body = shareData.body ? ( shareData.body + "\n\n" + shareData.url)
-   : shareData.url;
-  if( type === 'email' ) {
-    link ='mailto:?subject='+encodeURIComponent(shareData.subject) +
-     '&body='+encodeURIComponent(body);
-    return callback(null, { link: link });
-  }
-  else if( type === 'sms' ) {
-    platform =amxSocialSharePrivate.getPlatform();
+  var body = shareData.body ? (shareData.body + "\n\n" + shareData.url) : shareData.url;
+  if (type === 'email') {
+    link = 'mailto:?subject=' + encodeURIComponent(shareData.subject) +
+      '&body=' + encodeURIComponent(body);
+    return callback(null, {
+      link: link
+    });
+  } else if (type === 'sms') {
+    platform = amxSocialSharePrivate.getPlatform();
     // ios does not allow pre-populating body.
     // http://stackoverflow.com/questions/16165393/ios-sms-scheme-in-html-hyperlink-with-body
-    link = ( platform.ios ) ? 'sms:' : ( 'sms:?body=' + encodeURIComponent(body) );
-    return callback(null, { link: link });
-  }
-  else if( type === 'gmail' ) {
-    link ='https://mail.google.com/mail/u/0/?view=cm&fs=1&su=' +
-     encodeURIComponent(shareData.subject) + '&body=' +
-     encodeURIComponent(body);
-    return callback(null, { link: link });
-  }
-  else if( type === 'googlePlus' ) {
-    link ='https://plus.google.com/share?url=' +
-     encodeURIComponent(shareData.url);
-    return callback(null, { link: link });
-  }
-  else if( type === 'facebook' ) {
-    link ='https://www.facebook.com/sharer/sharer.php?u=' +
-     encodeURIComponent(shareData.url);
-    return callback(null, { link: link });
-  }
-  else if( type === 'facebookMessage' ) {
-    link ='https://www.facebook.com/dialog/send?link=' +
-     encodeURIComponent(shareData.url) + '&app_id=' + shareData.facebookAppId +
-     '&redirect_uri=' + encodeURIComponent(shareData.redirectUrl)
-     + '&display=popup';
-    return callback(null, { link: link });
-  }
-  else if( type === 'linkedIn' ) {
-    link ='https://www.linkedin.com/shareArticle?mini=true&url=' +
-     encodeURIComponent(shareData.url) + '&title=' +
-     encodeURIComponent(shareData.subject) + '&summary=' +
-     encodeURIComponent(body);
-    return callback(null, { link: link });
-  }
-  else if( type === 'pinterest' ) {
-    link ='http://pinterest.com/pin/create/button/?url=' +
-     encodeURIComponent(shareData.url) + '&media=' +
-     encodeURIComponent(shareData.image) + '&description=' +
-     encodeURIComponent(shareData.description);
-    return callback(null, { link: link });
-  }
-  else if( type === 'twitter' ) {
-    link ='https://twitter.com/share?url=' + encodeURIComponent(shareData.url);
-    if(shareData.defaultShareText !==undefined) {
-      link +='&text='+encodeURIComponent(shareData.defaultShareText);
+    link = (platform.ios) ? 'sms:' : ('sms:?body=' + encodeURIComponent(body));
+    return callback(null, {
+      link: link
+    });
+  } else if (type === 'gmail') {
+    link = 'https://mail.google.com/mail/u/0/?view=cm&fs=1&su=' +
+      encodeURIComponent(shareData.subject) + '&body=' +
+      encodeURIComponent(body);
+    return callback(null, {
+      link: link
+    });
+  } else if (type === 'googlePlus') {
+    link = 'https://plus.google.com/share?url=' +
+      encodeURIComponent(shareData.url);
+    return callback(null, {
+      link: link
+    });
+  } else if (type === 'facebook') {
+    link = 'https://www.facebook.com/sharer/sharer.php?u=' +
+      encodeURIComponent(shareData.url);
+    return callback(null, {
+      link: link
+    });
+  } else if (type === 'facebookMessage') {
+    link = 'https://www.facebook.com/dialog/send?link=' +
+      encodeURIComponent(shareData.url) + '&app_id=' + shareData.facebookAppId +
+      '&redirect_uri=' + encodeURIComponent(shareData.redirectUrl) + '&display=popup';
+    return callback(null, {
+      link: link
+    });
+  } else if (type === 'linkedIn') {
+    link = 'https://www.linkedin.com/shareArticle?mini=true&url=' +
+      encodeURIComponent(shareData.url) + '&title=' +
+      encodeURIComponent(shareData.subject) + '&summary=' +
+      encodeURIComponent(body);
+    return callback(null, {
+      link: link
+    });
+  } else if (type === 'pinterest') {
+    link = 'http://pinterest.com/pin/create/button/?url=' +
+      encodeURIComponent(shareData.url) + '&media=' +
+      encodeURIComponent(shareData.image) + '&description=' +
+      encodeURIComponent(shareData.description);
+    return callback(null, {
+      link: link
+    });
+  } else if (type === 'twitter') {
+    link = 'https://twitter.com/share?url=' + encodeURIComponent(shareData.url);
+    if (shareData.defaultShareText !== undefined) {
+      link += '&text=' + encodeURIComponent(shareData.defaultShareText);
     }
-    return callback(null, { link: link });
+    return callback(null, {
+      link: link
+    });
   }
   callback(null, null);
 };
 
-amxSocialSharePrivate.inputSelectAll =function(classname, id) {
-  var ele =document.getElementById(id);
+amxSocialSharePrivate.inputSelectAll = function(classname, id) {
+  var ele = document.getElementById(id);
   // get input
-  ele =ele.getElementsByClassName(classname)[0];
-  if(ele) {
+  ele = ele.getElementsByClassName(classname)[0];
+  if (ele) {
     ele.setSelectionRange(0, ele.value.length);
   }
 };
 
-amxSocialSharePrivate.triggerShare =function(type, shareData, params) {
-  if( type === 'url' ) {
+amxSocialSharePrivate.triggerShare = function(type, shareData, params) {
+  if (type === 'url') {
     amxSocialSharePrivate.inputSelectAll('amx-social-share-url-input', params.btnId);
     return;
   }
-  if(type && shareData) {
+  if (type && shareData) {
     // Must open pop-up window immediately (before AJAX call) to prevent
     // pop-up blockers from stopping it. After it is open, then set the url.
     var windowHandle;
-    if(Meteor.isCordova) {
+    if (Meteor.isCordova) {
       // Can NOT set the href after the window is open if using Cordova.
       // https://wiki.apache.org/cordova/InAppBrowser
       // windowHandle =window.open(null, "_blank", "location=yes");
       amxSocialShare.formLink(type, shareData, function(err, result) {
-        if(result.link) {
-          windowHandle =window.open(result.link, "_blank", "location=yes");
-        }
-        else {
+        if (result.link) {
+          windowHandle = window.open(result.link, "_blank", "location=yes");
+        } else {
           console.error('amx-social-share no link');
         }
       });
-    }
-    else {
-      windowHandle =window.open(null, "", "height=440,width=640,scrollbars=yes");
+    } else {
+      windowHandle = window.open(null, "", "height=440,width=640,scrollbars=yes");
       amxSocialShare.formLink(type, shareData, function(err, result) {
-        if(result.link) {
-          windowHandle.location.href =result.link;
-        }
-        else {
+        if (result.link) {
+          windowHandle.location.href = result.link;
+        } else {
           windowHandle.close();
         }
       });
@@ -222,11 +232,11 @@ amxSocialSharePrivate.triggerShare =function(type, shareData, params) {
   }
 };
 
-amxSocialSharePrivate.formButtonHtml =function(types, html, shareData) {
+amxSocialSharePrivate.formButtonHtml = function(types, html, shareData) {
   html = html || {};
   types.forEach(function(key) {
-    html[key] = html[key] ? html[key] : ( key === 'url' ) ? (
-      "<input type='text' readonly=true value='" + shareData.url +"' class='amx-social-share-url-input' />"
+    html[key] = html[key] ? html[key] : (key === 'url') ? (
+      "<input type='text' readonly=true value='" + shareData.url + "' class='amx-social-share-url-input' />"
     ) : (
       "<div class='amx-social-share-btn-icon'>" + amxSocialSharePrivate.svgs[key].html + "</div>"
     );
@@ -237,72 +247,82 @@ amxSocialSharePrivate.formButtonHtml =function(types, html, shareData) {
 /**
 Filters out known issues
 */
-amxSocialSharePrivate.filterTypes =function(opts) {
-  var platform =amxSocialSharePrivate.getPlatform();
+amxSocialSharePrivate.filterTypes = function(opts) {
+  var platform = amxSocialSharePrivate.getPlatform();
 
   // Facebook does not close (freezes app) in Cordova app ios..
   // TODO - fix this
-  if( opts.facebook && ( platform.ios && platform.cordova ) ) {
-    opts.facebook =false;
+  if (opts.facebook && (platform.ios && platform.cordova)) {
+    opts.facebook = false;
   }
 
   // Facebook message does not work on mobile
-  if( opts.facebookMessage && ( platform.mobile || platform.cordova ) ) {
-    opts.facebookMessage =false;
+  if (opts.facebookMessage && (platform.mobile || platform.cordova)) {
+    opts.facebookMessage = false;
   }
 
   // Gmail does not work well on mobile so just disable it and use email instead.
-  if( opts.gmail && ( platform.mobile || platform.cordova ) ) {
-    opts.gmail =false;
-    opts.email =true;
+  if (opts.gmail && (platform.mobile || platform.cordova)) {
+    opts.gmail = false;
+    opts.email = true;
   }
 
   // SMS only works on mobile
-  if( opts.sms && ( !platform.mobile && !platform.cordova ) ) {
-    opts.sms =false;
+  if (opts.sms && (!platform.mobile && !platform.cordova)) {
+    opts.sms = false;
   }
 
   return opts;
 };
 
-Template.amxSocialShare.created =function() {
+Template.amxSocialShare.created = function() {
   this.instid = new ReactiveVar((Math.random() + 1).toString(36).substring(7));
 };
 
 Template.amxSocialShare.helpers({
   data: function() {
-    var opts =this.opts;
-    var ret ={
+    var opts = this.opts;
+    var ret = {
       eles: {},
       active: {}
     };
-    var instid =Template.instance().instid.get();
-    var types =['email', 'facebook', 'facebookMessage', 'gmail', 'googlePlus',
-     'linkedIn', 'pinterest', 'sms', 'twitter', 'url'];
-    opts =amxSocialSharePrivate.filterTypes(opts);
+    var params = {
+      bootstrap: false,
+      customClasses: {}
+    };
+    var instid = Template.instance().instid.get();
+    var types = ['email', 'facebook', 'facebookMessage', 'gmail', 'googlePlus',
+      'linkedIn', 'pinterest', 'sms', 'twitter', 'url'
+    ];
+    opts = amxSocialSharePrivate.filterTypes(opts);
 
-    var shareData =opts.shareData;
-    var buttonHtml =amxSocialSharePrivate.formButtonHtml(types,
-     opts.buttonHtml, shareData);
+    params.bootstrap = opts.bootstrap;
+    params.customClasses = opts.customClasses;
+    params.containerClass = opts.bootstrap ? '' : 'amx-social-share-cont';
+
+    var shareData = opts.shareData;
+    var buttonHtml = amxSocialSharePrivate.formButtonHtml(types,
+      opts.buttonHtml, shareData);
     var ii, type;
-    for(ii =0; ii<types.length; ii++) {
+    for (ii = 0; ii < types.length; ii++) {
       (function(ii) {
-        type =types[ii];
-        if(!opts[type]) {
-          ret.active[type] =false;
-        }
-        else {
-          ret.active[type] =true;
-          ret.eles[types[ii]] ={
-            id: 'socialShare'+instid+types[ii],
+        type = types[ii];
+        if (!opts[type]) {
+          ret.active[type] = false;
+        } else {
+          ret.active[type] = true;
+          ret.eles[types[ii]] = {
+            id: 'socialShare' + instid + types[ii],
             buttonHtml: buttonHtml[types[ii]]
           };
           setTimeout(function() {
-            amxSocialShare.add(ret.eles[types[ii]].id, types[ii], shareData, {});
+            amxSocialShare.add(ret.eles[types[ii]].id, types[ii], shareData, params);
           }, 500);
         }
       })(ii);
     }
+    ret.params = params;
+
     return ret;
   }
 });

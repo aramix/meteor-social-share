@@ -35,6 +35,7 @@ if(Meteor.isClient) {
   Template.socialShare.helpers({
     opts: function() {
       var opts = {
+        bootstrap: true, // enables bootstrap styles
         email: true,
         facebook: true,
         facebookMessage: true,

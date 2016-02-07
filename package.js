@@ -1,6 +1,6 @@
 Package.describe({
   name: 'aramix:social-share',
-  version: '1.0.4',
+  version: '1.0.5',
   // Brief, one-line summary of the package.
   summary: 'Forked from lukemadera:social-share. Now supports bootstrap and optional classes for social buttons.',
   // URL to the Git repository containing the source code for this package.
