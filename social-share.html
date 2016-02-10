@@ -3,71 +3,39 @@
   <div class='{{ data.params.containerClass }}'>
 
     {{#if data.active.sms}}
-      <a id='{{data.eles.sms.id}}' class='amx-social-share-btn amx-social-share-sms'>{{{ data.eles.sms.buttonHtml }}}</a>
+      <a id='{{data.eles.sms.id}}' class='{{ useBootstrap }} {{ data.params.customClasses.sms }} amx-social-share-btn amx-social-share-sms'>{{{ data.eles.sms.buttonHtml }}}</a>
     {{/if}}
 
     {{#if data.active.facebookMessage}}
-      {{#if data.params.bootstrap}}
-        <a id='{{data.eles.facebookMessage.id}}' class='btn-social-icon {{ data.params.customClasses.facebookMessage }} amx-social-share-btn amx-social-share-facebook-message'>{{{ data.eles.facebookMessage.buttonHtml }}}</a>
-      {{else}}
-        <a id='{{data.eles.facebookMessage.id}}' class='{{ data.params.customClasses.facebookMessage }} amx-social-share-btn amx-social-share-facebook-message'>{{{ data.eles.facebookMessage.buttonHtml }}}</a>
-      {{/if}}
+      <a id='{{data.eles.facebookMessage.id}}' class='{{ useBootstrap }} {{ data.params.customClasses.facebookMessage }} amx-social-share-btn amx-social-share-facebook-message'>{{{ data.eles.facebookMessage.buttonHtml }}}</a>
     {{/if}}
 
     {{#if data.active.gmail}}
-      {{#if data.params.bootstrap}}
-        <a id='{{data.eles.gmail.id}}' class='btn-social-icon {{ data.params.customClasses.gmail }} amx-social-share-btn amx-social-share-gmail'>{{{ data.eles.gmail.buttonHtml }}}</a>
-      {{else}}
-        <a id='{{data.eles.gmail.id}}' class='{{ data.params.customClasses.gmail }} amx-social-share-btn amx-social-share-gmail'>{{{ data.eles.gmail.buttonHtml }}}</a>
-      {{/if}}
+      <a id='{{data.eles.gmail.id}}' class='{{ useBootstrap }} {{ data.params.customClasses.gmail }} amx-social-share-btn amx-social-share-gmail'>{{{ data.eles.gmail.buttonHtml }}}</a>
     {{/if}}
 
     {{#if data.active.email}}
-      {{#if data.params.bootstrap}}
-        <a id='{{data.eles.email.id}}' class='btn-social-icon {{ data.params.customClasses.email }} amx-social-share-btn amx-social-share-email'>{{{ data.eles.email.buttonHtml }}}</a>
-      {{else}}
-        <a id='{{data.eles.email.id}}' class='{{ data.params.customClasses.email }} amx-social-share-btn amx-social-share-email'>{{{ data.eles.email.buttonHtml }}}</a>
-      {{/if}}
+      <a id='{{data.eles.email.id}}' class='{{ useBootstrap }} {{ data.params.customClasses.email }} amx-social-share-btn amx-social-share-email'>{{{ data.eles.email.buttonHtml }}}</a>
     {{/if}}
 
     {{#if data.active.googlePlus}}
-      {{#if data.params.bootstrap}}
-        <a id='{{data.eles.googlePlus.id}}' class='btn-social-icon {{ data.params.customClasses.googlePlus }} amx-social-share-btn amx-social-share-google-plus'>{{{ data.eles.googlePlus.buttonHtml }}}</a>
-      {{else}}
-        <a id='{{data.eles.googlePlus.id}}' class='{{ data.params.customClasses.googlePlus }} amx-social-share-btn amx-social-share-google-plus'>{{{ data.eles.googlePlus.buttonHtml }}}</a>
-      {{/if}}
+      <a id='{{data.eles.googlePlus.id}}' class='{{ useBootstrap }} {{ data.params.customClasses.googlePlus }} amx-social-share-btn amx-social-share-google-plus'>{{{ data.eles.googlePlus.buttonHtml }}}</a>
     {{/if}}
 
     {{#if data.active.linkedIn}}
-      {{#if data.params.bootstrap}}
-        <a id='{{data.eles.linkedIn.id}}' class='btn-social-icon {{ data.params.customClasses.linkedIn }} amx-social-share-btn amx-social-share-linked-in'>{{{ data.eles.linkedIn.buttonHtml }}}</a>
-      {{else}}
-        <a id='{{data.eles.linkedIn.id}}' class='{{ data.params.customClasses.linkedIn }} amx-social-share-btn amx-social-share-linked-in'>{{{ data.eles.linkedIn.buttonHtml }}}</a>
-      {{/if}}
+      <a id='{{data.eles.linkedIn.id}}' class='{{ useBootstrap }} {{ data.params.customClasses.linkedIn }} amx-social-share-btn amx-social-share-linked-in'>{{{ data.eles.linkedIn.buttonHtml }}}</a>
     {{/if}}
 
     {{#if data.active.pinterest}}
-      {{#if data.params.bootstrap}}
-        <a id='{{data.eles.pinterest.id}}' class='btn-social-icon {{ data.params.customClasses.pinterest }} amx-social-share-btn amx-social-share-pinterest'>{{{ data.eles.pinterest.buttonHtml }}}</a>
-      {{else}}
-        <a id='{{data.eles.pinterest.id}}' class='{{ data.params.customClasses.pinterest }} amx-social-share-btn amx-social-share-pinterest'>{{{ data.eles.pinterest.buttonHtml }}}</a>
-      {{/if}}
+      <a id='{{data.eles.pinterest.id}}' class='{{ useBootstrap }} {{ data.params.customClasses.pinterest }} amx-social-share-btn amx-social-share-pinterest'>{{{ data.eles.pinterest.buttonHtml }}}</a>
     {{/if}}
 
     {{#if data.active.twitter}}
-      {{#if data.params.bootstrap}}
-        <a id='{{data.eles.twitter.id}}' class='btn-social-icon {{ data.params.customClasses.twitter }} amx-social-share-btn amx-social-share-twitter'>{{{ data.eles.twitter.buttonHtml }}}</a>
-      {{else}}
-        <a id='{{data.eles.twitter.id}}' class='{{ data.params.customClasses.twitter }} amx-social-share-btn amx-social-share-twitter'>{{{ data.eles.twitter.buttonHtml }}}</a>
-      {{/if}}
+      <a id='{{data.eles.twitter.id}}' class='{{ useBootstrap }} {{ data.params.customClasses.twitter }} amx-social-share-btn amx-social-share-twitter'>{{{ data.eles.twitter.buttonHtml }}}</a>
     {{/if}}
 
     {{#if data.active.facebook}}
-      {{#if data.params.bootstrap}}
-        <a id='{{data.eles.facebook.id}}' class='btn-social-icon {{ data.params.customClasses.facebook }} amx-social-share-btn amx-social-share-facebook'>{{{ data.eles.facebook.buttonHtml }}}</a>
-      {{else}}
-        <a id='{{data.eles.facebook.id}}' class='{{ data.params.customClasses.facebook }} amx-social-share-btn amx-social-share-facebook'>{{{ data.eles.facebook.buttonHtml }}}</a>
-      {{/if}}
+      <a id='{{data.eles.facebook.id}}' class='{{ useBootstrap }} {{ data.params.customClasses.facebook }} amx-social-share-btn amx-social-share-facebook'>{{{ data.eles.facebook.buttonHtml }}}</a>
     {{/if}}
 
     {{#if data.active.url}}

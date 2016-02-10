@@ -74,13 +74,13 @@ amxSocialShare.add = function(btnId, type, shareData, params) {
         if (result.link) {
           document.getElementById(btnId).href = result.link;
           document.getElementById(btnId).target = '_blank';
-          if(params.bootstrap) {
-            var bootstrapClasses = ['btn', 'btn-lg', 'btn-social-icon'];
-            document.getElementById(btnId).classList.add(bootstrapClasses);
-          }
-          if(params.customClasses[type]) {
-            document.getElementById(btnId).classList.add(params.customClasses[type].trim().split(' '));
-          }
+          // if(params.bootstrap) {
+          //   var bootstrapClasses = ['btn', 'btn-lg', 'btn-social-icon'];
+          //   document.getElementById(btnId).classList.add(bootstrapClasses);
+          // }
+          // if(params.customClasses[type]) {
+          //   document.getElementById(btnId).classList.add(params.customClasses[type].trim().split(' '));
+          // }
         } else {
           console.error('amx-social-share no link');
         }
@@ -324,5 +324,8 @@ Template.amxSocialShare.helpers({
     ret.params = params;
 
     return ret;
+  },
+  useBootstrap: function() {
+    return this.opts.bootstrap ? 'btn-social-icon' : '';
   }
 });

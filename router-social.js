@@ -24,6 +24,7 @@ Router.route('metatags', {
   where: 'server',
   path: /.*/,   //match all routes / any route
   action: function() {
+    console.log('================================================');
     var req =this.request;
     var res =this.response;
     var userAgent =req.headers['user-agent'];
@@ -40,7 +41,7 @@ Router.route('metatags', {
     else if(userAgent !==undefined && (userAgent.indexOf('LinkedInBot') >-1)) {
       socialScraper ='linkedIn';
     }
-    
+
 
     if(socialScraper) {
       var reqUrl =req.url;
@@ -58,7 +59,7 @@ Router.route('metatags', {
       if(reqUrl[(reqUrl.length-1)] ==='/') {
         reqUrl =reqUrl.slice(0, (reqUrl.length-1));
       }
-     
+
       //form site url base
       var cfgAppInfo =Config.appInfo({});
       var url1 =cfgAppInfo.rootUrl;
@@ -85,7 +86,7 @@ Router.route('metatags', {
       html ="<!DOCTYPE html>"+
       "<html lang='en'>"+
       "<head>";
-        
+
       if(socialScraper ==='facebook' || socialScraper ==='linkedIn') {
         html +="<meta property='og:title' content='"+meta.title+"' />"+
         "<meta property='og:site_name' content='"+cfgAppInfo.name+"' />"+
